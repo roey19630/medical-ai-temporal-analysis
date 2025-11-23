@@ -1,74 +1,67 @@
-# 🏥 Clinical Temporal Data Management Tool
+# 🏥 AI Medical Temporal Database System  
+An interactive Python-based system for managing **temporal medical data**, including searching historical medical values, editing records, handling deletions, and retrieving LOINC metadata.
 
-A Python-based command-line tool for managing **temporal clinical data**.  
-Supports value lookup, history exploration, editing, and deletion while keeping full temporal consistency.
-
-The system loads a clinical dataset (Excel) and a LOINC dictionary (CSV), and provides interactive operations using transaction-time and valid-time logic.
+The project implements a miniature **temporal database**, enabling querying of past states based on transaction time and valid time.
 
 ---
 
-## ⚙️ Features
+## ✨ Features
 
-### 🔍 Value Search  
-Query a patient’s lab result at a specific valid-time while respecting:
-- Transaction-time constraints  
-- Deletions and temporal updates  
-- LOINC common name lookup
+### • Temporal Value Search  
+Search patient data using:
+- First name / last name  
+- LOINC code  
+- Valid start date & time  
+- Transaction-time filtering  
+Includes automatic retrieval of **LOINC common names**.
 
-### 📚 History Search  
-Display all versions of a patient’s measurement with timestamp filtering.
+### • Temporal History Tracking  
+Query full history of a medical measurement over:
+- Custom time intervals  
+- Specific dates or timestamps
 
-### ✏️ Edit Value  
-Add updated lab values while automatically recording:
-- New Value  
-- Last Update timestamp
+### • Edit & Update Records  
+Modify values with proper:
+- `Last Update` timestamp  
+- `New Value` tracking
 
-### 🗑 Delete Entry  
-Soft-deletion using temporal flags:
-- `Deleted = True`  
-- `Delete_time = timestamp`
-
----
-
-## 📁 Project Structure
-
-```
-main.py                     → Main application (menu & logic)
-project_db.xlsx             → Clinical temporal dataset
-Loinc.csv                   → LOINC code dictionary
-```
+### • Logical Deletion  
+Mark rows as deleted while keeping them queryable according to temporal rules.
 
 ---
 
-## 🧰 Requirements
-
+## 📁 Files Included
 ```
+ai-medical-temporal-db/
+│── project.py
+│── project_db_test_DEFENSE_25_final.xlsx
+│── Loinc.csv
+│── README.md
+```
+
+---
+
+## 🛠️ How to Run
+
+Install dependencies (only pandas required):
+
+```bash
 pip install pandas
 ```
 
----
+Run the program:
 
-## ▶️ Run the Application
-
-```
-python main.py
+```bash
+python project.py
 ```
 
-The interactive menu will appear:
-```
-1. Search Value
-2. Search History
-3. Edit Row
-4. Delete Row
-5. Exit
-```
+The menu will appear in the console automatically.
 
 ---
 
-## 📌 Notes
-- The dataset uses **valid-time** and **transaction-time** fields.  
-- Bug fix applied to ensure correct retrieval of latest transaction record during same-time conflicts.  
-  (See line 121 in `main.py`)  :contentReference[oaicite:1]{index=1}
+## 📊 Dataset Notes
+- `project_db_test_DEFENSE_25_final.xlsx` contains the temporal medical records.
+- `Loinc.csv` provides mapping from LOINC codes to their common names.
 
 ---
 
